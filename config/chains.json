@@ -1,0 +1,63 @@
+[
+    {
+      "name": "Ethereum",
+      "chain_id": 1,
+      "symbol": "ETH",
+      "decimals": 18,
+      "rpc_url": "https://rpc.ankr.com/eth",
+      "multi_send_call_only": "0xA1dabEF33b3B82c7814B6D82A79e50F4AC44102B",
+      "wrap_token": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "wrap_token_symbol": "WETH"
+    },
+    {
+      "name": "BitLayer",
+      "chain_id": 200901,
+      "symbol": "BTC",
+      "decimals": 18,
+      "rpc_url": "https://rpc.bitlayer.org",
+      "multi_send_call_only": "0x40A2aCCbd92BCA938b02010E17A5b8929b49130D",
+      "wrap_token": "0xff204e2681a6fa0e2c3fade68a1b28fb90e4fc5f",
+      "wrap_token_symbol": "WBTC"
+    },
+    {
+      "name": "BitLayerTestnet",
+      "chain_id": 200810,
+      "symbol": "BTC",
+      "decimals": 18,
+      "rpc_url": "https://testnet-rpc.bitlayer.org",
+      "multi_send_call_only": "0x40A2aCCbd92BCA938b02010E17A5b8929b49130D",
+      "wrap_token": "0x3e57d6946f893314324c975aa9cebbdf3232967e",
+      "wrap_token_symbol": "WBTC"
+    },
+    {
+      "name": "Eth Sepolia",
+      "chain_id": 11155111,
+      "symbol": "ETH",
+      "decimals": 18,
+      "rpc_url": "https://rpc.ankr.com/eth_sepolia",
+      "multi_send_call_only": "0x40A2aCCbd92BCA938b02010E17A5b8929b49130D",
+      "wrap_token": "0x097D90c9d3E0B50Ca60e1ae45F6A81010f9FB534",
+      "wrap_token_symbol": "WETH"
+    },
+    {
+      "name": "BNB Chain",
+      "chain_id": 56,
+      "symbol": "BNB", 
+      "decimals": 18,
+      "rpc_url": "https://rpc.ankr.com/bsc",
+      "multi_send_call_only": "0xA1dabEF33b3B82c7814B6D82A79e50F4AC44102B",
+      "wrap_token": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "wrap_token_symbol": "WBNB"
+    },
+    {
+      "name": "UniChain",
+      "chain_id": 130,
+      "symbol": "ETH",
+      "decimals": 18,
+      "rpc_url": "https://mainnet.unichain.org",
+      "multi_send_call_only": "0xA1dabEF33b3B82c7814B6D82A79e50F4AC44102B",
+      "wrap_token": "0x4200000000000000000000000000000000000006",
+      "wrap_token_symbol": "WETH"
+    }
+]
+
