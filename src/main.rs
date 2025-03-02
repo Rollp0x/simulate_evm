@@ -1,4 +1,4 @@
-use actix_web::{web, App, HttpServer};
+use actix_web::{web, App, HttpServer,get,HttpResponse};
 use alloy::{
     providers::{ProviderBuilder, RootProvider},
     transports::http::{Client, Http},
@@ -12,11 +12,15 @@ use revm_trace::{
 };
 use std::{collections::HashMap, env, fs};
 use tokio::sync::mpsc;
+use serde::Serialize;
+use chrono;
+use actix_cors::Cors;
 
 mod error;
 mod trace;
 mod types;
 use types::{ChainInfo, TraceResponse, TxRequest};
+use trace::simulate_batch;
 
 #[derive(Clone)]
 pub struct AppState {
@@ -67,8 +71,13 @@ async fn main() -> std::io::Result<()> {
     });
     // 创建 HTTP 服务器
     let port = env::var("PORT").unwrap_or_else(|_| "8080".to_string());
-    let server = HttpServer::new(move || App::new().app_data(app_state.clone()))
-        .bind(format!("127.0.0.1:{}", port))?
+    let server = HttpServer::new(move || {
+            let cors = Cors::permissive();  // only on dev
+            App::new().app_data(app_state.clone())
+            .wrap(cors)
+            .service(health_check)
+            .service(simulate_batch)
+        }).bind(format!("127.0.0.1:{}", port))?
         .run();
     // 启动服务器但不等待
     let server_handle = server.handle();
@@ -149,4 +158,26 @@ async fn main() -> std::io::Result<()> {
     server_handle.stop(true).await;
     println!("👋 Shutdown complete");
     Ok(())
+}
+
+
+
+#[derive(Serialize)]
+struct HealthResponse {
+    name:String,
+    version: String,
+    status: String,
+    timestamp: i64,  // 添加时间戳
+}
+
+// 健康检查接口
+#[get("/health")]
+async fn health_check() -> Result<HttpResponse, actix_web::Error> {
+    Ok(HttpResponse::Ok().json(HealthResponse {
+        name:env!("CARGO_PKG_NAME").to_string(),
+        status: "healthy".to_string(),
+        version: env!("CARGO_PKG_VERSION").to_string(),
+        // 添加时间戳
+        timestamp: chrono::Utc::now().timestamp()
+    }))
 }
